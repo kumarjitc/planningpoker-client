@@ -7,6 +7,9 @@ Client App is in progress and I am using React as the client app technology. As 
 - Game board
 
 To do 
+- Routing
 - Actual forms
 - Story boards
 - History/Report
+
+Whole client application is not working yet.
