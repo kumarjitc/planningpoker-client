@@ -1,0 +1,36 @@
+.player-view {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 10px 10px;
+}
+
+.board {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.my-hand {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.turn-summary {
+    justify-content: center;
+    display: flex;
+    flex: 1;
+}
+
+.turn-summary .table {
+    max-width: 350px;
+}
+
+.turn-summary .table .head-cell {
+    background-color: #487fd8;
+    color: #FFF;
+    font-weight: 700;
+}

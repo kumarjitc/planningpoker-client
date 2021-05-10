@@ -8,8 +8,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import JoinRoomIcon from '@material-ui/icons/GroupAddTwoTone';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoomTwoTone';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoardTwoTone';
-import AddNewSession from '../AddNewSession/AddNewSession';
+import StartNewgame from '../StartNewGame/StartNewGame';
 import { ColorCodes } from '../../utils';
+import GameBoard from '../GamePlay/GameBoard/GameBoard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +50,7 @@ export default function AppShell() {
                 <JoinRoomIcon />
               </Fab>
             </Tooltip>
-            <Tooltip title="Start New Session">
+            <Tooltip title="Start New Game">
               <Fab className={classes.fab} size="small">
                 <DeveloperBoardIcon />
               </Fab>
@@ -62,7 +63,7 @@ export default function AppShell() {
           </div>
         </Toolbar>
       </AppBar>
-      <AddNewSession />
+      <GameBoard />
       {/* <Layout>
         <Switch>
           <Route path="/checkout" component={Checkout} />

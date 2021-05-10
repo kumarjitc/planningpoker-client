@@ -1,0 +1,13 @@
+
+
+hr.section-break {
+  margin: 10px 0;
+  border: 0;
+  text-align: center;
+}
+
+hr.section-break:before {
+    content: "\2022 \2022 \2022 \2022 \2022";
+    font-size: 30px;
+    color: #4F8BCA;
+  }

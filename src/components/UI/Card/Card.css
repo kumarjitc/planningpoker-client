@@ -1,0 +1,52 @@
+.Card {
+    width: 60px;
+    height: 100px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: 'Roboto';
+    font-size: 50px;
+    line-height: 100px;
+}
+
+.hand {
+    /* fallback for old browsers */
+    background: #84fab0;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    border: 1px solid #08903a;
+    color: #3f51b5;
+    cursor: pointer;
+}
+
+.played {
+    /* fallback for old browsers */
+    background: #a1c4fd;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom, rgba(161, 196, 253, 0.5), rgba(194, 233, 251, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgba(161, 196, 253, 0.5), rgba(194, 233, 251, 0.5));
+    border: 1px solid #487fd8;
+    color: #487fd8;
+}
+
+.Card.hand:hover,
+.active {
+    /* fallback for old browsers */
+    background: #a6c0fe;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom, rgba(166, 192, 254, 0.5), rgba(246, 128, 132, 0.5));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgba(166, 192, 254, 0.5), rgba(246, 128, 132, 0.5));
+    border: 1px solid #092d83;
+    transform: rotate(10deg);
+    color: #753939;
+}

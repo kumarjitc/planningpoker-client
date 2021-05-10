@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -9,8 +9,12 @@ import {
     MenuItem,
     Select,
     Switch,
-    FormLabel
+    FormLabel,
+    Chip,
+    Input
 } from '@material-ui/core';
+import InvitationIcon from '@material-ui/icons/ViewAgendaTwoTone';
+import FileCopyIcon from '@material-ui/icons/FileCopyTwoTone';
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,29 +25,68 @@ const useStyles = makeStyles((theme) => ({
 
 const FormInput = (props) => {
     const classes = useStyles();
+    const [copied, setCopied] = React.useState('');
     let element = null;
-    const inputProps = {
-        ...props
-    };
 
-    switch (inputProps.type) {
-        case 'input':
+    const validate = (event) => {
+        let invalid = false;
+        const validators = props.validators;
+        const value = event.target.value;
+
+        for (let i = 0; i < validators.length; i++) {
+            switch (validators[i]) {
+                case REQUIRED:
+                    if (!value.trim()) {
+                        invalid = true;
+                        break;
+                    }
+                    break;
+            }
+        }
+
+        return invalid;
+    }
+
+    const onCopyClick = async () => {
+        await navigator.clipboard.writeText(props.value);
+    }
+
+    const handleCopyNotification = () => {
+        setCopied('ID Copied To ClipBoard - ');
+
+        setTimeout(() => {
+            setCopied('');
+        }, 5000);
+    }
+
+    switch (props.type) {
+        case INPUT:
             element = <FormControl variant="outlined">
-                <InputLabel htmlFor="component-outlined">Textbox</InputLabel>
+                <InputLabel htmlFor={props.name + "-component-outlined"}>{props.label}</InputLabel>
                 <OutlinedInput
-                    id="component-outlined"
-                    label="Name"
-                    value={inputProps.value} />
+                    id={props.name + "-component-outlined"}
+                    label="TextBox"
+                    value={props.value}
+                    onChange={(event) => {
+                        props.onChange(props.name, event.target.value);
+                    }}
+                    onBlur={(event) => {
+                        if (props.validators && validate(event)) {
+                            props.onBlur(props.name);
+                        }
+                    }}
+                    error={props.invalid}
+                />
             </FormControl>
             break;
-        case 'select':
+        case SELECT:
             const options = props.options || [];
             element = <FormControl variant="outlined" className={classes.root}>
                 <InputLabel id="demo-simple-select-outlined-label">Select</InputLabel>
                 <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    label="Age"
+                    label="Select"
                 >
                     {options.map((option, index) => (
                         <MenuItem key={index} value={option.value || ''}>
@@ -53,7 +96,7 @@ const FormInput = (props) => {
                 </Select>
             </FormControl>
             break;
-        case 'date':
+        case DATE:
             const today = new Date();
             element = <FormControl variant="outlined">
                 <Fragment>
@@ -70,29 +113,46 @@ const FormInput = (props) => {
                 </Fragment>
             </FormControl>
             break;
-        case 'switch':
+        case SWITCH:
             element = <FormControl component="fieldset">
                 <FormLabel component="legend">Assign responsibility</FormLabel>
                 <FormControlLabel
                     control={<Switch name="start" />}
-                    label="Start    "
+                    label="Start"
                 />
             </FormControl>
             break;
-        case 'textarea':
+        case TEXTAREA:
             element = <FormControl variant="outlined" size="medium">
                 <InputLabel htmlFor="component-outlined">Textarea</InputLabel>
                 <OutlinedInput
                     id="component-outlined"
-                    label="Name"
+                    label="Textarea"
                     multiline
                     rows={10}
                     cols={100}
-                    value={inputProps.value} />
+                    value={props.value} />
             </FormControl>
             break;
-        default:
-            element = <div>Input Type Not Defined</div>
+        case LABEL:
+            element = <>
+                <input id={"hidden-" + props.name} value={props.value} type="hidden" />
+                <Chip
+                    icon={<InvitationIcon />}
+                    label={(copied ? copied : 'Copy This ID To Invite Others To Join - ') + props.value}
+                    clickable
+                    color="primary"
+                    onDelete={() => {
+                        onCopyClick().then(data => {
+                            handleCopyNotification();
+                        }).catch(error => {
+                            throw new "excption " + error.message;
+                        });
+                    }}
+                    deleteIcon={<FileCopyIcon />}
+                    variant={copied ? 'default' : 'outlined'}
+                />
+            </>
     }
 
     return (
@@ -100,6 +160,30 @@ const FormInput = (props) => {
             {element}
         </div>
     );
-}
+};
+
+// Control Types
+export const [
+    INPUT,
+    SELECT,
+    DATE,
+    SWITCH,
+    TEXTAREA,
+    LABEL
+] = [
+        'input',
+        'select',
+        'date',
+        'switch',
+        'textarea',
+        'label'
+    ];
+
+// Validators
+export const [
+    REQUIRED
+] = [
+        'required'
+    ];
 
 export default FormInput;
