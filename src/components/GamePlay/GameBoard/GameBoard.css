@@ -1,8 +1,17 @@
 .player-view {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     min-height: 100%;
     margin: 10px 10px;
+}
+
+.player-view .playing-hand {
+    flex-basis: 70rem;
+}
+
+.player-view .story-board {
+    flex-basis: 30rem;
+    border-left: 1px solid #5E8EDD;
 }
 
 .board {

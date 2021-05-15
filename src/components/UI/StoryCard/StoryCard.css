@@ -1,0 +1,40 @@
+.story-card {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.story-summary {
+    font-size: 15px;
+    line-height: 20px;
+    border-left: none;
+    background-color: #DDF9D4;
+    text-align: left;
+}
+
+.story-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #C5F1B9;
+}
+
+.action-view-story {
+    background-color: #90CAF9!important;
+    color: #000!important;
+}
+
+.story-result {
+    margin-right: 10px;
+}
+
+.on-board .story-summary {
+    background-color: #F9D2D2!important;
+}
+
+.on-board .story-actions {
+    background-color: #E6A0A0!important;
+}
+
+.on-board-header {
+    margin-bottom: 15px!important;
+}

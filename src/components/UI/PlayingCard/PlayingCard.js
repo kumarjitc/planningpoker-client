@@ -4,9 +4,9 @@ import {
 } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 
-import './Card.css';
+import './PlayingCard.css';
 
-export default function Card(props) {
+export default function PlayingCard(props) {
     let showPlayerChip = props.isOnBoard ? (<Chip
         size="small"
         icon={<FaceIcon />}
