@@ -11,6 +11,9 @@ import {
     Fab
 } from '@material-ui/core';
 import AddStory from '@material-ui/icons/AddBoxTwoTone';
+import LowestBid from '@material-ui/icons/CallReceivedTwoTone';
+import HighestBid from '@material-ui/icons/CallMadeTwoTone';
+import OverTrump from '@material-ui/icons/GavelTwoTone';
 
 import PlayingCard from '../../UI/PlayingCard/PlayingCard';
 import StoryCard from "../../UI/StoryCard/StoryCard";
@@ -99,35 +102,56 @@ export default class GameBoard extends Component {
                         }
                     </div>
                     <hr className="section-break" />
-                    <h2>Turn Summary</h2>
-                    <div className="turn-summary">
-                        <TableContainer className="table" component={Paper}>
-                            <Table aria-label="Results Table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell className="head-cell" align="right">Average</TableCell>
-                                        <TableCell className="head-cell" align="right">Lowest</TableCell>
-                                        <TableCell className="head-cell" align="right">Highest</TableCell>
-                                        <TableCell className="head-cell" align="right">Won</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell align="right">3</TableCell>
-                                        <TableCell align="right">5</TableCell>
-                                        <TableCell align="right">2</TableCell>
-                                        <TableCell align="right">4</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                    <h2>
+                        Turn Summary
+                        <div className="turn-action-area">
+                            <Tooltip title="Accept Lowest">
+                                <Fab size="small" color="primary">
+                                    <LowestBid />
+                                </Fab>
+                            </Tooltip>
+                            <Tooltip title="Accept Highest">
+                                <Fab size="small" color="primary">
+                                    <HighestBid />
+                                </Fab>
+                            </Tooltip>
+                            <Tooltip title="Trump User Bids">
+                                <Fab size="small" color="secondary">
+                                    <OverTrump />
+                                </Fab>
+                            </Tooltip>
+                        </div>
+                    </h2>
+                    <div className="turn-decision">
+                        <div className="turn-summary">
+                            <TableContainer className="table" component={Paper}>
+                                <Table aria-label="Results Table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell className="head-cell" align="right">Average</TableCell>
+                                            <TableCell className="head-cell" align="right">Lowest</TableCell>
+                                            <TableCell className="head-cell" align="right">Highest</TableCell>
+                                            <TableCell className="head-cell" align="right">Won</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell align="right">3</TableCell>
+                                            <TableCell align="right">5</TableCell>
+                                            <TableCell align="right">2</TableCell>
+                                            <TableCell align="right">4</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
                     </div>
                 </div>
                 <div className="story-board">
                     <h2>
                         Story Board
                         <Tooltip title="Add Story">
-                            <Fab size="small">
+                            <Fab size="small" color="primary">
                                 <AddStory />
                             </Fab>
                         </Tooltip>
