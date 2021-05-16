@@ -82,7 +82,7 @@ export default class GameBoard extends Component {
 
     render() {
         return (
-            <div className="player-view">
+            <div className="player-view container">
                 <div className="playing-hand">
                     <h2>Hand</h2>
                     <div className="my-hand">

@@ -11,6 +11,7 @@ import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoardTwoTone';
 import StartNewgame from '../StartNewGame/StartNewGame';
 import { ColorCodes } from '../../utils';
 import GameBoard from '../GamePlay/GameBoard/GameBoard';
+import Projects from '../Setup/Projects/Projects';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +64,7 @@ export default function AppShell() {
           </div>
         </Toolbar>
       </AppBar>
-      <GameBoard />
+      <Projects />
       {/* <Layout>
         <Switch>
           <Route path="/checkout" component={Checkout} />

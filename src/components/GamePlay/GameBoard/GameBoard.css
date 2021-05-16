@@ -1,14 +1,5 @@
 .player-view {
-    display: flex;
-    flex-direction: row;
     min-height: 100%;
-    margin: 10px 10px;
-}
-
-.player-view h2 {
-    line-height: 2em;
-    display: flex;
-    justify-content: space-between;
 }
 
 .player-view .playing-hand {
@@ -34,6 +25,10 @@
     flex-wrap: wrap;
 }
 
+.table {
+    max-width: 350px;
+}
+
 .turn-action-area {
     display: flex;
     flex: 0 0 20%;
@@ -46,14 +41,4 @@
     justify-content: center;
     display: flex;
     flex: 1;
-}
-
-.turn-summary .table {
-    max-width: 350px;
-}
-
-.turn-summary .table .head-cell {
-    background-color: #487fd8;
-    color: #FFF;
-    font-weight: 700;
 }
