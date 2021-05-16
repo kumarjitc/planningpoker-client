@@ -22,7 +22,7 @@ export default class ProjectList {
 
     columns() {
         return [
-            GridColumn.createNew().addField(ID).addIsHidden(true).build(),
+            GridColumn.createNew().addField(ID).addIsHidden(true).addIsReadonly(true).build(),
             GridColumn.createNew().addField(NAME).addHeaderName(NAME_HEADER).build(),
             GridColumn.createNew().addField(DESCRIPTION).addHeaderName(DESCRIPTION_HEADER).build(),
             GridColumn.createNew().addField(OWNER).addHeaderName(OWNER_HEADER).build()

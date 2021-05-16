@@ -3,6 +3,7 @@ export const [
     WIDTH,
     HEADER_NAME,
     HIDE,
+    EDITABLE,
     ROWS,
     COLUMNS
 ] = [
@@ -10,6 +11,7 @@ export const [
         'width',
         'headerName',
         'hide',
+        'editable',
         'rows',
         'columns'
     ];
