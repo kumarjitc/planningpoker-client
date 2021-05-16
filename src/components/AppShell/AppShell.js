@@ -12,6 +12,7 @@ import StartNewgame from '../StartNewGame/StartNewGame';
 import { ColorCodes } from '../../utils';
 import GameBoard from '../GamePlay/GameBoard/GameBoard';
 import Projects from '../Setup/Projects/Projects';
+import Sprints from '../Setup/Sprints/Sprints';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +65,7 @@ export default function AppShell() {
           </div>
         </Toolbar>
       </AppBar>
-      <Projects />
+      <Sprints />
       {/* <Layout>
         <Switch>
           <Route path="/checkout" component={Checkout} />
