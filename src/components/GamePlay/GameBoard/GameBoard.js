@@ -6,8 +6,11 @@ import {
     TableBody,
     TableRow,
     TableCell,
-    TableHead
+    TableHead,
+    Tooltip,
+    Fab
 } from '@material-ui/core';
+import AddStory from '@material-ui/icons/AddBoxTwoTone';
 
 import PlayingCard from '../../UI/PlayingCard/PlayingCard';
 import StoryCard from "../../UI/StoryCard/StoryCard";
@@ -121,7 +124,14 @@ export default class GameBoard extends Component {
                     </div>
                 </div>
                 <div className="story-board">
-                    <h2>Story Board</h2>
+                    <h2>
+                        Story Board
+                        <Tooltip title="Add Story">
+                            <Fab size="small">
+                                <AddStory />
+                            </Fab>
+                        </Tooltip>
+                    </h2>
                     <div className="story-list">
                         <div className="story">
                             {

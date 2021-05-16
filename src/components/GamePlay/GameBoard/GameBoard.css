@@ -5,6 +5,12 @@
     margin: 10px 10px;
 }
 
+.player-view h2 {
+    line-height: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
 .player-view .playing-hand {
     flex-basis: 80rem;
 }

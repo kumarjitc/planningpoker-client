@@ -5,11 +5,13 @@ import {
     Typography,
     CardActions,
     Button,
-    Badge
+    Badge,
+    Tooltip,
+    Fab
 } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import ViewHand from '@material-ui/icons/GamesTwoTone';
 import PollIcon from '@material-ui/icons/Poll';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ViewStory from '@material-ui/icons/OpenInNewTwoTone';
 
 import './StoryCard.css';
 
@@ -18,13 +20,11 @@ export default function StoryCard(props) {
     const showResults = !props.isOnBoard ? (<Badge badgeContent={props.result} color="primary" className="story-result" title="Result">
         <PollIcon />
     </Badge>) : null;
-    const linkToStory = props.link ? (<Button
-        variant="contained"
-        color="secondary"
-        size="small"
-        startIcon={<ExitToAppIcon />}
-        className="action-view-story"
-        onClick={() => window.open(props.link)}>Open Story</Button>) : null;
+    const linkToStory = props.link ? (<Tooltip title="View Story" onClick={() => window.open(props.link)}>
+        <Fab size="small">
+            <ViewStory />
+        </Fab>
+    </Tooltip>) : null;
 
     return (
         <Card className={`story-card ${props.isOnBoard ? 'on-board' : ''}`} variant="outlined">
@@ -33,12 +33,11 @@ export default function StoryCard(props) {
                 <Typography variant="body" component="p" color="textSecondary">{props.summary}</Typography>
             </CardContent>
             <CardActions className="story-actions">
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    startIcon={<VisibilityIcon />}
-                    className="action-view-story">View Hand</Button>
+                <Tooltip title="View Hand">
+                    <Fab size="small">
+                        <ViewHand />
+                    </Fab>
+                </Tooltip>
                 {linkToStory}
                 {showResults}
             </CardActions>
