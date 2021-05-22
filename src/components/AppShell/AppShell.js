@@ -5,14 +5,24 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 import JoinRoomIcon from '@material-ui/icons/GroupAddTwoTone';
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoomTwoTone';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoardTwoTone';
-import StartNewgame from '../StartNewGame/StartNewGame';
+import HomeIcon from '@material-ui/icons/HomeTwoTone';
+import DashBoardIcon from '@material-ui/icons/AccountTreeTwoTone';
+
 import { ColorCodes } from '../../utils';
-import GameBoard from '../GamePlay/GameBoard/GameBoard';
-import Projects from '../Setup/Projects/Projects';
+
+import StartNewgame from '../StartNewGame/StartNewGame';
 import Sprints from '../Setup/Sprints/Sprints';
+
+import Routes from '../../utils/RouteConstants';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,39 +50,49 @@ export default function AppShell() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="sticky" className={classes.root}>
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Planning Poker - Your SCRUM Buddy
-          </Typography>
-          <div className={classes.grow} />
-          <div>
+      <Router>
+        <AppBar position="sticky" className={classes.root}>
+          <Toolbar>
             <Tooltip title="Join Room">
-              <Fab className={classes.fab} size="small">
-                <JoinRoomIcon />
-              </Fab>
+              <Link to={Routes.HOME}>
+                <Fab className={classes.fab} size="small">
+                  <HomeIcon />
+                </Fab>
+              </Link>
             </Tooltip>
-            <Tooltip title="Start New Game">
-              <Fab className={classes.fab} size="small">
-                <DeveloperBoardIcon />
-              </Fab>
-            </Tooltip>
-            <Tooltip title="Create Room">
-              <Fab className={classes.fab} size="small">
-                <MeetingRoomIcon />
-              </Fab>
-            </Tooltip>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Sprints />
-      {/* <Layout>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Planning Poker - Your SCRUM Buddy
+            </Typography>
+            <div className={classes.grow} />
+            <div>
+              <Tooltip title="Join Room">
+                <Fab className={classes.fab} size="small">
+                  <JoinRoomIcon />
+                </Fab>
+              </Tooltip>
+              <Tooltip title="Projects And Sprints">
+                <Link to={Routes.SPRINTS}>
+                  <Fab className={classes.fab} size="small">
+                    <DashBoardIcon />
+                  </Fab>
+                </Link>
+              </Tooltip>
+              <Tooltip title="Start New Game">
+                <Link to={Routes.GAME_START}>
+                  <Fab className={classes.fab} size="small">
+                    <DeveloperBoardIcon />
+                  </Fab>
+                </Link>
+              </Tooltip>
+            </div>
+          </Toolbar>
+        </AppBar>
         <Switch>
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/history" exact component={Orders} />
-          <Route path="/" exact component={BurgerBuilder} />
+          <Route path={Routes.HOME} exact component={null} />
+          <Route path={Routes.SPRINTS} exact component={Sprints} />
+          <Route path={Routes.GAME_START} exact component={StartNewgame} />
         </Switch>
-      </Layout> */}
+      </Router>
     </div>
   );
 }
