@@ -18,7 +18,8 @@ const DATA = [{
     id: 3,
     description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',
     name: 'test project 1',
-    owner: 'Test Owner 1'
+    owner: 'Test Owner 1',
+    isSelected: true
 }, {
     id: 4,
     description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',

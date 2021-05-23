@@ -2,6 +2,7 @@ export const [
     DESCRIPTION,
     NAME,
     OWNER,
+    ISSELECTED,
     ID,
     DESCRIPTION_HEADER,
     NAME_HEADER,
@@ -11,6 +12,7 @@ export const [
         'description',
         'name',
         'owner',
+        'isSelected',
         'id',
         'Description',
         'Name',
@@ -22,12 +24,14 @@ export default class Project {
     name = '';
     description = '';
     owner = '';
+    isSelected = '';
     id = '';
 
     constructor(data) {
         this.name = data.name;
         this.description = data.description;
         this.owner = data.owner;
+        this.isSelected = data.isSelected;
         this.id = data.id;
     }
 
@@ -36,6 +40,7 @@ export default class Project {
             [NAME]: this.name,
             [OWNER]: this.owner,
             [DESCRIPTION]: this.description,
+            [ISSELECTED]: this.isSelected,
             [ID]: this.id || ''
         };
     }
