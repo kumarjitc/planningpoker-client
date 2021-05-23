@@ -12,12 +12,10 @@ Client App is in progress and I am using React as the client app technology. As 
   - Sprint
 
 To do 
-- Routing
 - Actual forms
 - History/Report
 - Add Function
-- Story Add Modal
-- Think If We Need These Many Components Or A Generic One Will Do
-- Package Paths
+- Add Modal
+- Package Paths With Index.js
 
 The client application as a whole is not working yet.
