@@ -15,7 +15,17 @@ const useStyles = makeStyles({
         display: 'inline-flex',
         flexWrap: 'wrap',
         flex: 1,
-        gap: '12px'
+        gap: '12px',
+        maxHeight: '325px',
+        overflowY: 'scroll',
+        '&::-webkit-scrollbar': {
+            width: '5px'
+        },
+        '&::-webkit-scrollbar-thumb': {
+            background: '#F0D4D3',
+            boxShadow: 'inset 1px 1px 5px #E08281',
+            borderRadius: '5px'
+        }
     },
     card: {
         width: '47%',
