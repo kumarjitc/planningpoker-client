@@ -20,7 +20,7 @@ import DashBoardIcon from '@material-ui/icons/AccountTreeTwoTone';
 import { ColorCodes } from '../../utils';
 
 import StartNewgame from '../StartNewGame/StartNewGame';
-import Sprints from '../Setup/Sprints/Sprints';
+import Dashboard from '../MasterDashboard/Dashboard';
 
 import Routes from '../../utils/RouteConstants';
 
@@ -71,7 +71,7 @@ export default function AppShell() {
                 </Fab>
               </Tooltip>
               <Tooltip title="Projects And Sprints">
-                <Link to={Routes.SPRINTS}>
+                <Link to={Routes.DASHBOARDS}>
                   <Fab className={classes.fab} size="small">
                     <DashBoardIcon />
                   </Fab>
@@ -89,7 +89,7 @@ export default function AppShell() {
         </AppBar>
         <Switch>
           <Route path={Routes.HOME} exact component={null} />
-          <Route path={Routes.SPRINTS} exact component={Sprints} />
+          <Route path={Routes.DASHBOARDS} exact component={Dashboard} />
           <Route path={Routes.GAME_START} exact component={StartNewgame} />
         </Switch>
       </Router>
