@@ -15,3 +15,9 @@ export const [
         'rows',
         'columns'
     ];
+
+export const DEFAULT_COLUMN = {
+    [WIDTH]: 300,
+    [EDITABLE]: true,
+    [HIDE]: false
+}

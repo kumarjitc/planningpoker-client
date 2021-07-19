@@ -1,42 +1,21 @@
 import { Component } from "react";
+import OperationManager from "../../../models/data/OperationManager";
+import Project from "../../../models/data/project/project";
 
-import ProjectList from "../../../models/project/projectList";
-import AppGrid from "../../UI/AppGrid/AppGrid";
 import CardGrid from "../../UI/CardGrid/CardGrid";
-
-const DATA = [{
-    id: 1,
-    description: 'This is a story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    owner: 'Test Owner 1'
-}, {
-    id: 2,
-    description: 'This is another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    owner: 'Test Owner 1'
-}, {
-    id: 3,
-    description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    owner: 'Test Owner 1',
-    isSelected: true
-}, {
-    id: 4,
-    description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    owner: 'Test Owner 1'
-}, {
-    id: 5,
-    description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    owner: 'Test Owner 1'
-}];
 
 export default class Projects extends Component {
     state = {};
 
-    componentDidMount() {
-        this.setState(new ProjectList(DATA).build());
+    constructor() {
+        super();
+        this.entityFactory = new OperationManager(Project);
+    }
+
+    async componentDidMount() {
+        let data = await this.entityFactory.getAll();
+
+        this.setState(data);
     }
 
     render() {

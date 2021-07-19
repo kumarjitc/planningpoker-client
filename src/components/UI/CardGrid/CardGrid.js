@@ -86,8 +86,8 @@ const useStyles = makeStyles({
     }
 });
 
-const onEditClick = () => {
-    alert('I AM EDIT AND I AM Clicked');
+const onEditClick = (id) => {
+    alert('I AM EDIT AND I AM Clicked - ' + id);
 }
 
 const Card = (props) => {
@@ -102,14 +102,16 @@ const Card = (props) => {
                     {props.name}
                 </Typography>
                 <Tooltip title="Edit">
-                    <Fab size="small" onClick={onEditClick}>
+                    <Fab size="small" onClick={() => {
+                        onEditClick(props._id);
+                    }}>
                         <EditIcon />
                     </Fab>
                 </Tooltip>
             </CardActions>
             <CardContent>
                 <Typography variant="h5" component="h3" color="textSecondary">{props.owner}</Typography>
-                <Typography variant="body" component="p" color="textSecondary">{props.description}</Typography>
+                <Typography variant="body" component="p" color="textSecondary">{props.desc}</Typography>
             </CardContent>
         </MaterialCard>
     );

@@ -8,9 +8,6 @@ import Sprint, {
     PROJECT_HEADER
 } from "./sprint";
 
-import GridColumn from "../gridData/gridColumn";
-import GridData from "../gridData/gridData";
-
 export default class SprintList {
     list = [];
 
@@ -21,15 +18,17 @@ export default class SprintList {
     }
 
     columns() {
-        return [
+        /* return [
             GridColumn.createNew().addField(ID).addIsHidden(true).addIsReadonly(true).build(),
             GridColumn.createNew().addField(NAME).addHeaderName(NAME_HEADER).build(),
             GridColumn.createNew().addField(DESCRIPTION).addHeaderName(DESCRIPTION_HEADER).build(),
             GridColumn.createNew().addField(PROJECT).addHeaderName(PROJECT_HEADER).build()
-        ];
+        ]; */
+        return [];
     }
 
     build() {
-        return GridData.createNew().addColumns(this.columns()).addRows(this.list).build();
+        //return GridData.createNew().addColumns(this.columns()).addRows(this.list).build();
+        return {};
     }
 }

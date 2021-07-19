@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import SprintList from "../../../models/sprint/sprintList";
+import SprintList from '../../../models/data/sprint/sprintList';
 import AppGrid from "../../UI/AppGrid/AppGrid";
 import CardGrid from "../../UI/CardGrid/CardGrid";
 
@@ -25,7 +25,7 @@ export default class Projects extends Component {
     state = {};
 
     componentDidMount() {
-        this.setState(new SprintList(DATA).build());
+        this.setState({});
     }
 
     render() {
