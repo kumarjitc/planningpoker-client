@@ -20,6 +20,9 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '50%'
+    },
+    fullWidth: {
+        display: 'flex'
     }
 }));
 
@@ -61,7 +64,7 @@ const FormInput = (props) => {
 
     switch (props.type) {
         case INPUT:
-            element = <FormControl variant="outlined">
+            element = <FormControl variant="outlined" className={props.fullWidth ? classes.fullWidth : null}>
                 <InputLabel htmlFor={props.name + "-component-outlined"}>{props.label}</InputLabel>
                 <OutlinedInput
                     id={props.name + "-component-outlined"}
@@ -98,7 +101,7 @@ const FormInput = (props) => {
             break;
         case DATE:
             const today = new Date();
-            element = <FormControl variant="outlined">
+            element = <FormControl variant="outlined" className={props.fullWidth ? classes.fullWidth : null}>
                 <Fragment>
                     <KeyboardDatePicker
                         autoOk
@@ -123,11 +126,11 @@ const FormInput = (props) => {
             </FormControl>
             break;
         case TEXTAREA:
-            element = <FormControl variant="outlined" size="medium">
-                <InputLabel htmlFor="component-outlined">Textarea</InputLabel>
+            element = <FormControl variant="outlined" size="medium" className={props.fullWidth ? classes.fullWidth : null}>
+                <InputLabel htmlFor="component-outlined">{props.label}</InputLabel>
                 <OutlinedInput
                     id="component-outlined"
-                    label="Textarea"
+                    label={props.label}
                     multiline
                     rows={10}
                     cols={100}

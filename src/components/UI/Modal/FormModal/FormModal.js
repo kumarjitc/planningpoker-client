@@ -70,7 +70,7 @@ export default function FormModal(props) {
                         Save Project Details
                     </DialogContentText>
                     <FormContianer>
-                        <FormGroup {...props.controls} />
+                        <FormGroup {...props.controls} fullWidth={true} />
                     </FormContianer>
                 </DialogContent>
             </Dialog>

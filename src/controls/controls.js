@@ -1,22 +1,22 @@
-import { HIDDEN, INPUT, REQUIRED } from '../components/UI/FormInput/FormInput';
+import { HIDDEN, INPUT, TEXTAREA, REQUIRED } from '../components/UI/FormInput/FormInput';
 
 export const PROJECT = {
     name: {
         value: '',
         type: INPUT,
-        label: 'Project Code',
+        label: 'Name',
         validators: [REQUIRED]
     },
     desc: {
         value: '',
-        type: INPUT,
-        label: 'Project Description',
+        type: TEXTAREA,
+        label: 'Description',
         validators: [REQUIRED]
     },
     owner: {
         value: '',
         type: INPUT,
-        label: 'Project Owner',
+        label: 'Owner',
         validators: [REQUIRED]
     },
     _id: {
