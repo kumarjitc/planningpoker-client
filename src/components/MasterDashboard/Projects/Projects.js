@@ -3,9 +3,14 @@ import OperationManager from "../../../models/data/OperationManager";
 import Project from "../../../models/data/project/project";
 
 import CardGrid from "../../UI/CardGrid/CardGrid";
+import FormModal from '../../UI/Modal/FormModal/FormModal';
+import { PROJECT } from '../../../controls/controls'
 
 export default class Projects extends Component {
-    state = {};
+    state = {
+        openModal: false,
+        controls: PROJECT
+    };
 
     constructor() {
         super();
@@ -15,17 +20,42 @@ export default class Projects extends Component {
     async componentDidMount() {
         let data = await this.entityFactory.getAll();
 
-        this.setState(data);
+        this.setState({
+            ...this.state,
+            ...data
+        });
+    }
+
+    onEditClick(id) {
+        console.log(this.state);
+        this.setState({
+            ...this.state,
+            openModal: true
+        });
+    }
+
+    onModalClose() {
+        this.setState({
+            ...this.state,
+            openModal: false
+        });
     }
 
     render() {
         return (
-            <div className="container">
-                <h2>Projects</h2>
-                <div className="project-list">
-                    <CardGrid {...this.state} />
+            <>
+                <div className="container">
+                    <h2>Projects</h2>
+                    <div className="project-list">
+                        <CardGrid {...this.state} type="project" onEditClick={(id) => {
+                            this.onEditClick(id);
+                        }} />
+                    </div>
                 </div>
-            </div>
+                <FormModal open={this.state.openModal} controls={this.state.controls} onCancel={() => {
+                    this.onModalClose();
+                }} />
+            </>
         );
     }
 }

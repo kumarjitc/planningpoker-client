@@ -15,12 +15,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormContianer(props) {
     const classes = useStyles();
+    const header = props.header ? (<Typography variant="h5" align="left" color="primary" className={classes.header}>
+        {props.header}
+    </Typography>) : null;
 
     return (
         <div className={'FormContainer'}>
-            <Typography variant="h5" align="left" color="primary" className={classes.header}>
-                {props.header}
-            </Typography>
+            {header}
             {props.children}
         </div>
     );

@@ -40,6 +40,6 @@ export default class Project extends EntityFactory {
   }
 
   static getEndpoint() {
-    return 'setup/project';
+    return ENDPOINT;
   }
 }

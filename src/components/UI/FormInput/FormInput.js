@@ -169,14 +169,16 @@ export const [
     DATE,
     SWITCH,
     TEXTAREA,
-    LABEL
+    LABEL,
+    HIDDEN,
 ] = [
         'input',
         'select',
         'date',
         'switch',
         'textarea',
-        'label'
+        'label',
+        'hidden',
     ];
 
 // Validators

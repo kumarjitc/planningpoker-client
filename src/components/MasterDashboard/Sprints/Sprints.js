@@ -29,6 +29,7 @@ export default class Projects extends Component {
     }
 
     render() {
+        console.log('HERE2', new Date());
         return (
             <div className="container">
                 <h2>Sprints</h2>

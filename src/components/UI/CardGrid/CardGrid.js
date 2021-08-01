@@ -86,10 +86,6 @@ const useStyles = makeStyles({
     }
 });
 
-const onEditClick = (id) => {
-    alert('I AM EDIT AND I AM Clicked - ' + id);
-}
-
 const Card = (props) => {
     const classes = useStyles();
     const isSelected = props.isSelected ? (<SelectedIcon className="selected" />) : null;
@@ -102,16 +98,14 @@ const Card = (props) => {
                     {props.name}
                 </Typography>
                 <Tooltip title="Edit">
-                    <Fab size="small" onClick={() => {
-                        onEditClick(props._id);
-                    }}>
+                    <Fab size="small" onClick={() => { props.onEditClick(props._id); }}>
                         <EditIcon />
                     </Fab>
                 </Tooltip>
             </CardActions>
             <CardContent>
                 <Typography variant="h5" component="h3" color="textSecondary">{props.owner}</Typography>
-                <Typography variant="body" component="p" color="textSecondary">{props.desc}</Typography>
+                <Typography variant="caption" component="p" color="textSecondary">{props.desc}</Typography>
             </CardContent>
         </MaterialCard>
     );
@@ -120,8 +114,8 @@ const Card = (props) => {
 const CardGrid = (props) => {
     const classes = useStyles();
 
-    const grid = props && props.rows ? props.rows.map(item => {
-        return <Card {...item} />;
+    const grid = props && props.rows ? props.rows.map((item, index) => {
+        return <Card {...item} onEditClick={props.onEditClick} key={index} />;
     }) : null;
 
     return (
