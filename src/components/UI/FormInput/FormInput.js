@@ -35,7 +35,6 @@ const FormInput = (props) => {
         let invalid = false;
         const validators = props.validators;
         const value = event.target.value;
-        console.log('VALUE', value);
 
         for (let i = 0; i < validators.length; i++) {
             switch (validators[i]) {

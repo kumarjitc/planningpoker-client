@@ -1,6 +1,9 @@
 import { HttpHelper } from "../../utils/HttpHelper";
 import GridData from "../grid/data";
 
+const DB_ID = '_id';
+const URL_ID = 'id';
+
 export default class OperationManager {
     entity;
 
@@ -16,10 +19,15 @@ export default class OperationManager {
         return GridData.createNew().addColumns(this.entity.getGridColumns()).addRows(list).build();
     }
 
-    async update(path, data) {
-        await new HttpHelper().makePutRequest(this.entity.getEndpoint(), path, data);
+    async update(data) {
+        let path = {
+            [URL_ID]: data[DB_ID]
+        }
+        delete data._id;
 
-        return 'Working';
+        let message = await new HttpHelper().makePutRequest(this.entity.getEndpoint(), path, data);
+
+        return message;
     }
 
     flattenData(item) {

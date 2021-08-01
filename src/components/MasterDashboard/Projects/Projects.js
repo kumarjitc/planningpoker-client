@@ -63,11 +63,7 @@ class Projects extends Component {
     }
 
     async save(data) {
-        let path = {
-            'id': data['_id']
-        }
-        delete data._id;
-        await this.entityFactory.update(path, data);
+        await this.entityFactory.update(data);
 
         this.onModalClose();
         await this.getAll();
