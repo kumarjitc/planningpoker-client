@@ -80,6 +80,8 @@ const FormInput = (props) => {
                             props.onBlur(props.name, false);
                         }
                     }}
+                    helperText="Invalid entry"
+                    inputProps={{ 'maxlength': props.length || 15 }}
                     error={props.invalid}
                 />
             </FormControl>
@@ -136,7 +138,9 @@ const FormInput = (props) => {
                     multiline
                     rows={10}
                     cols={100}
-                    value={props.value} />
+                    value={props.value}
+                    inputProps={{ 'maxlength': props.length || 500 }}
+                />
             </FormControl>
             break;
         case LABEL:
@@ -189,6 +193,13 @@ export const [
         'textarea',
         'label',
         'hidden',
+    ];
+
+// Control Attributes
+export const [
+    LENGTH
+] = [
+        'length'
     ];
 
 // Validators
