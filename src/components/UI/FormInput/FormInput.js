@@ -35,6 +35,7 @@ const FormInput = (props) => {
         let invalid = false;
         const validators = props.validators;
         const value = event.target.value;
+        console.log('VALUE', value);
 
         for (let i = 0; i < validators.length; i++) {
             switch (validators[i]) {
@@ -139,7 +140,18 @@ const FormInput = (props) => {
                     rows={10}
                     cols={100}
                     value={props.value}
+                    onChange={(event) => {
+                        props.onChange(props.name, event.target.value);
+                    }}
+                    onBlur={(event) => {
+                        if (props.validators && isInvalid(event)) {
+                            props.onBlur(props.name, true);
+                        } else {
+                            props.onBlur(props.name, false);
+                        }
+                    }}
                     inputProps={{ 'maxlength': props.length || 500 }}
+                    error={props.invalid}
                 />
             </FormControl>
             break;
