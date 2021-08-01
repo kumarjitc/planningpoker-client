@@ -19,3 +19,6 @@ To do
 - Package Paths With Index.js
 
 The client application as a whole is not working yet.
+
+----------------------------------------------------------------------------
+Modify API to make success and error to have same response structure
