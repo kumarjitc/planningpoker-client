@@ -95,17 +95,17 @@ const Card = (props) => {
             <CardActions className="actionArea">
                 {isSelected}
                 <Typography variant="h5" component="h2" color="textSecondary">
-                    {props.name}
+                    {props.item.name}
                 </Typography>
                 <Tooltip title="Edit">
-                    <Fab size="small" onClick={() => { props.onEditClick(props._id); }}>
+                    <Fab size="small" onClick={() => { props.onEditClick(props.item); }}>
                         <EditIcon />
                     </Fab>
                 </Tooltip>
             </CardActions>
             <CardContent>
-                <Typography variant="h5" component="h3" color="textSecondary">{props.owner}</Typography>
-                <Typography variant="caption" component="p" color="textSecondary">{props.desc}</Typography>
+                <Typography variant="h5" component="h3" color="textSecondary">{props.item.owner}</Typography>
+                <Typography variant="caption" component="p" color="textSecondary">{props.item.desc}</Typography>
             </CardContent>
         </MaterialCard>
     );
@@ -115,7 +115,7 @@ const CardGrid = (props) => {
     const classes = useStyles();
 
     const grid = props && props.rows ? props.rows.map((item, index) => {
-        return <Card {...item} onEditClick={props.onEditClick} key={index} />;
+        return <Card item={item} onEditClick={props.onEditClick} key={index} />;
     }) : null;
 
     return (

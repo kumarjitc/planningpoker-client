@@ -31,7 +31,7 @@ const FormInput = (props) => {
     const [copied, setCopied] = React.useState('');
     let element = null;
 
-    const validate = (event) => {
+    const isInvalid = (event) => {
         let invalid = false;
         const validators = props.validators;
         const value = event.target.value;
@@ -74,8 +74,10 @@ const FormInput = (props) => {
                         props.onChange(props.name, event.target.value);
                     }}
                     onBlur={(event) => {
-                        if (props.validators && validate(event)) {
-                            props.onBlur(props.name);
+                        if (props.validators && isInvalid(event)) {
+                            props.onBlur(props.name, true);
+                        } else {
+                            props.onBlur(props.name, false);
                         }
                     }}
                     error={props.invalid}
@@ -155,6 +157,11 @@ const FormInput = (props) => {
                     deleteIcon={<FileCopyIcon />}
                     variant={copied ? 'default' : 'outlined'}
                 />
+            </>
+            break;
+        default:
+            element = <>
+                <input id={"hidden-" + props.name} value={props.value} type="hidden" />
             </>
     }
 

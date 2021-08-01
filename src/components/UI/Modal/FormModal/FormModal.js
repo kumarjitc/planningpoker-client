@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -40,6 +40,39 @@ const useStyles = makeStyles({
 export default function FormModal(props) {
     const classes = useStyles();
 
+    const buildForm = () => {
+        const controls = { ...props.controls };
+        if (!props.data) {
+            return controls;
+        }
+        Object.keys(controls).forEach(control => {
+            controls[control]['value'] = props.data[control];
+        });
+        return controls;
+    }
+
+    const [form, setForm] = useState(buildForm());
+
+    const onChange = (name, value) => {
+        setForm({
+            ...form,
+            [name]: {
+                ...form[name],
+                value: value
+            }
+        });
+    };
+
+    const onBlur = (name, isInvalid) => {
+        setForm({
+            ...form,
+            [name]: {
+                ...form[name],
+                invalid: isInvalid
+            }
+        });
+    };
+
     return (
         <div>
             <Dialog open={props.open} aria-labelledby="form-dialog-title">
@@ -70,7 +103,7 @@ export default function FormModal(props) {
                         Save Project Details
                     </DialogContentText>
                     <FormContianer>
-                        <FormGroup {...props.controls} fullWidth={true} />
+                        <FormGroup {...form} fullWidth={true} onChange={onChange} onBlur={onBlur} />
                     </FormContianer>
                 </DialogContent>
             </Dialog>

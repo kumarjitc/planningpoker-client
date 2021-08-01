@@ -24,7 +24,7 @@ class Projects extends Component {
     state = {
         openModal: false,
         controls: PROJECT,
-        id: null
+        selected: null
     };
 
     constructor() {
@@ -41,11 +41,12 @@ class Projects extends Component {
         });
     }
 
-    onEditClick(id) {
+    onEditClick(project) {
+
         this.setState({
             ...this.state,
             openModal: true,
-            id: id
+            selected: project
         });
     }
 
@@ -53,7 +54,7 @@ class Projects extends Component {
         this.setState({
             ...this.state,
             openModal: false,
-            id: null
+            selected: null
         });
     }
 
@@ -81,9 +82,13 @@ class Projects extends Component {
                         }} />
                     </div>
                 </div>
-                <FormModal open={this.state.openModal} controls={this.state.controls} onCancel={() => {
-                    this.onModalClose();
-                }} />
+                <FormModal
+                    open={this.state.openModal}
+                    controls={this.state.controls}
+                    data={this.state.selected}
+                    onCancel={() => {
+                        this.onModalClose();
+                    }} />
             </>
         );
     }
