@@ -18,7 +18,7 @@ export class HttpHelper {
             body: JSON.stringify(data)
         });
 
-        return response.text();
+        return response.json();
     }
 
     async makeDeleteRequest(endpoint, path) {

@@ -29,6 +29,7 @@ export default function CustomizedSnackbars(props) {
     };
 
     let message = props.type === SUCCESS ? 'Operation Completed Successfully!' : 'Error Occurred During Processing';
+    message = props.message || message;
 
     return (
         <div className={classes.root}>

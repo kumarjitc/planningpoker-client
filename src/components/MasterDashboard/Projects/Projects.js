@@ -67,10 +67,18 @@ class Projects extends Component {
     }
 
     async save(data) {
-        await this.entityFactory.save(data);
+        let message = await this.entityFactory.save(data);
 
-        this.onModalClose();
-        await this.getAll();
+        if (!message.errorMessage) {
+            this.onModalClose();
+            await this.getAll();
+        } else {
+            this.setState({
+                ...this.state,
+                isHttpComplete: true,
+                errorMessage: message.errorMessage
+            });
+        }
     }
 
     async delete(data) {
@@ -82,7 +90,9 @@ class Projects extends Component {
 
     render() {
         const { classes } = this.props;
-        const message = this.state.isHttpComplete ? (<MessageModal type={SUCCESS} />) : null;
+        const message = this.state.isHttpComplete
+            ? (<MessageModal type={this.state.errorMessage ? ERROR : SUCCESS} message={this.state.errorMessage} />)
+            : null;
 
         return (
             <>
