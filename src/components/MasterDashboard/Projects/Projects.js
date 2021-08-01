@@ -1,15 +1,30 @@
 import { Component } from "react";
 import OperationManager from "../../../models/data/OperationManager";
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
+import Addicon from '@material-ui/icons/Add';
 import Project from "../../../models/data/project/project";
 
 import CardGrid from "../../UI/CardGrid/CardGrid";
 import FormModal from '../../UI/Modal/FormModal/FormModal';
 import { PROJECT } from '../../../controls/controls'
+import { PRIMARY_GREEN, HOVER_GREEN } from "../../../utils/MaterialColorCodes";
+import { withStyles } from "@material-ui/core";
 
-export default class Projects extends Component {
+const styles = theme => ({
+    fabGreen: {
+        backgroundColor: PRIMARY_GREEN,
+        '&:hover': {
+            backgroundColor: HOVER_GREEN,
+        }
+    }
+});
+
+class Projects extends Component {
     state = {
         openModal: false,
-        controls: PROJECT
+        controls: PROJECT,
+        id: null
     };
 
     constructor() {
@@ -22,32 +37,46 @@ export default class Projects extends Component {
 
         this.setState({
             ...this.state,
-            ...data
+            data: data
         });
     }
 
     onEditClick(id) {
-        console.log(this.state);
         this.setState({
             ...this.state,
-            openModal: true
+            openModal: true,
+            id: id
         });
     }
 
     onModalClose() {
         this.setState({
             ...this.state,
-            openModal: false
+            openModal: false,
+            id: null
         });
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <>
                 <div className="container">
-                    <h2>Projects</h2>
+                    <h2>
+                        <div>
+                            Projects
+                        </div>
+                        <div>
+                            <Tooltip title="Add">
+                                <Fab size="small" className={classes.fabGreen}>
+                                    <Addicon />
+                                </Fab>
+                            </Tooltip>
+                        </div>
+                    </h2>
                     <div className="project-list">
-                        <CardGrid {...this.state} type="project" onEditClick={(id) => {
+                        <CardGrid {...this.state.data} type="project" onEditClick={(id) => {
                             this.onEditClick(id);
                         }} />
                     </div>
@@ -59,3 +88,5 @@ export default class Projects extends Component {
         );
     }
 }
+
+export default withStyles(styles)(Projects);

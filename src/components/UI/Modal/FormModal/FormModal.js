@@ -15,7 +15,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteIcon from '@material-ui/icons/DeleteForever';
 import { makeStyles } from '@material-ui/core/styles';
-import { green, grey } from '@material-ui/core/colors';
+import { PRIMARY_GREEN, HOVER_GREEN, PRIMARY_GREY, HOVER_GREY } from '../../../../utils/MaterialColorCodes';
 
 const useStyles = makeStyles({
     modalAction: {
@@ -23,10 +23,16 @@ const useStyles = makeStyles({
             marginRight: 10
         },
         '& .fabGreen': {
-            backgroundColor: green[500],
+            backgroundColor: PRIMARY_GREEN,
+            '&:hover': {
+                backgroundColor: HOVER_GREEN,
+            }
         },
         '& .fabGrey': {
-            backgroundColor: grey[500],
+            backgroundColor: PRIMARY_GREY,
+            '&:hover': {
+                backgroundColor: HOVER_GREY,
+            }
         }
     }
 });
