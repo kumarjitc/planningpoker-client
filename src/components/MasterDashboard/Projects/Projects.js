@@ -7,6 +7,7 @@ import Project from "../../../models/data/project/project";
 
 import CardGrid from "../../UI/CardGrid/CardGrid";
 import FormModal from '../../UI/Modal/FormModal/FormModal';
+import MessageModal, { SUCCESS, ERROR } from '../../UI/Modal/MessageModal/MessageModal';
 import { PROJECT } from '../../../controls/controls'
 import { PRIMARY_GREEN, HOVER_GREEN } from "../../../utils/MaterialColorCodes";
 import { withStyles } from "@material-ui/core";
@@ -24,7 +25,8 @@ class Projects extends Component {
     state = {
         openModal: false,
         controls: PROJECT,
-        selected: null
+        selected: null,
+        isHttpComplete: false
     };
 
     constructor() {
@@ -41,7 +43,8 @@ class Projects extends Component {
         this.setState({
             ...this.state,
             openModal: true,
-            selected: project
+            selected: project,
+            isHttpComplete: false
         });
     }
 
@@ -49,7 +52,8 @@ class Projects extends Component {
         this.setState({
             ...this.state,
             openModal: false,
-            selected: null
+            selected: null,
+            isHttpComplete: true
         });
     }
 
@@ -78,6 +82,7 @@ class Projects extends Component {
 
     render() {
         const { classes } = this.props;
+        const message = this.state.isHttpComplete ? (<MessageModal type={SUCCESS} />) : null;
 
         return (
             <>
@@ -104,6 +109,7 @@ class Projects extends Component {
                     open={this.state.openModal}
                     controls={this.state.controls}
                     data={this.state.selected}
+                    type="Project"
                     onCancel={() => {
                         this.onModalClose();
                     }}
@@ -114,6 +120,7 @@ class Projects extends Component {
                         this.delete(id);
                     }}
                 />
+                {message}
             </>
         );
     }

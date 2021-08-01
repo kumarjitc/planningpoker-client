@@ -89,14 +89,9 @@ export default function FormModal(props) {
             <Dialog open={props.open} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                     <div class="modal-title">
-                        Add/Update
+                        {`Modify ${props.type} Details`}
                     </div>
                     <div className={classes.modalAction}>
-                        <Tooltip title="Cancel">
-                            <Fab size="small" className="fabGrey" onClick={props.onCancel}>
-                                <CancelIcon />
-                            </Fab>
-                        </Tooltip>
                         <Tooltip title="Delete">
                             <Fab size="small" color="secondary" onClick={() => {
                                 props.onDelete(getValue());
@@ -111,12 +106,14 @@ export default function FormModal(props) {
                                 <SaveIcon />
                             </Fab>
                         </Tooltip>
+                        <Tooltip title="Cancel">
+                            <Fab size="small" className="fabGrey" onClick={props.onCancel}>
+                                <CancelIcon />
+                            </Fab>
+                        </Tooltip>
                     </div>
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Save Project Details
-                    </DialogContentText>
                     <FormContianer>
                         <FormGroup {...form} fullWidth={true} onChange={onChange} onBlur={onBlur} />
                     </FormContianer>
