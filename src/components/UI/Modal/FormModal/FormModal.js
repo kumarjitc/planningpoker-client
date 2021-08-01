@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 export default function FormModal(props) {
     const classes = useStyles();
 
-    const buildForm = () => {
+    const setValue = () => {
         const controls = { ...props.controls };
         if (!props.data) {
             return controls;
@@ -51,7 +51,7 @@ export default function FormModal(props) {
         return controls;
     }
 
-    const [form, setForm] = useState(buildForm());
+    const [form, setForm] = useState(setValue());
 
     const onChange = (name, value) => {
         setForm({
@@ -73,6 +73,17 @@ export default function FormModal(props) {
         });
     };
 
+    const getValue = () => {
+        let formValue = {};
+        Object.entries(form).forEach(entry => {
+            formValue = {
+                ...formValue,
+                [entry[0]]: entry[1].value
+            };
+        });
+        return formValue;
+    }
+
     return (
         <div>
             <Dialog open={props.open} aria-labelledby="form-dialog-title">
@@ -92,7 +103,9 @@ export default function FormModal(props) {
                             </Fab>
                         </Tooltip>
                         <Tooltip title="Save">
-                            <Fab size="small" color="primary" className="fabGreen">
+                            <Fab size="small" color="primary" className="fabGreen" onClick={() => {
+                                props.onSave(getValue());
+                            }}>
                                 <SaveIcon />
                             </Fab>
                         </Tooltip>

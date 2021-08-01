@@ -33,12 +33,7 @@ class Projects extends Component {
     }
 
     async componentDidMount() {
-        let data = await this.entityFactory.getAll();
-
-        this.setState({
-            ...this.state,
-            data: data
-        });
+        await this.getAll();
     }
 
     onEditClick(project) {
@@ -56,6 +51,26 @@ class Projects extends Component {
             openModal: false,
             selected: null
         });
+    }
+
+    async getAll() {
+        let data = await this.entityFactory.getAll();
+
+        this.setState({
+            ...this.state,
+            data: data
+        });
+    }
+
+    async save(data) {
+        let path = {
+            'id': data['_id']
+        }
+        delete data._id;
+        await this.entityFactory.update(path, data);
+
+        this.onModalClose();
+        await this.getAll();
     }
 
     render() {
@@ -88,6 +103,9 @@ class Projects extends Component {
                     data={this.state.selected}
                     onCancel={() => {
                         this.onModalClose();
+                    }}
+                    onSave={(data) => {
+                        this.save(data);
                     }} />
             </>
         );

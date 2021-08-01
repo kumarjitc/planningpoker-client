@@ -16,6 +16,12 @@ export default class OperationManager {
         return GridData.createNew().addColumns(this.entity.getGridColumns()).addRows(list).build();
     }
 
+    async update(path, data) {
+        await new HttpHelper().makePutRequest(this.entity.getEndpoint(), path, data);
+
+        return 'Working';
+    }
+
     flattenData(item) {
         let instance = Reflect.construct(this.entity, [item]);
 
