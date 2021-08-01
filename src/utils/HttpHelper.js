@@ -20,4 +20,14 @@ export class HttpHelper {
 
         return response.text();
     }
+
+    async makeDeleteRequest(endpoint, path) {
+        let params = Object.entries(path).map(entry => entry.join('/')).join('/');
+
+        let response = await fetch(`${BASE_URL}${endpoint}/${params}`, {
+            method: 'DELETE'
+        });
+
+        return response.text();
+    }
 }

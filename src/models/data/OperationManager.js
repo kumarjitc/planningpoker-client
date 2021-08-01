@@ -19,13 +19,23 @@ export default class OperationManager {
         return GridData.createNew().addColumns(this.entity.getGridColumns()).addRows(list).build();
     }
 
-    async update(data) {
+    async save(data) {
         let path = {
             [URL_ID]: data[DB_ID]
         }
         delete data._id;
 
         let message = await new HttpHelper().makePutRequest(this.entity.getEndpoint(), path, data);
+
+        return message;
+    }
+
+    async delete(data) {
+        let path = {
+            [URL_ID]: data[DB_ID]
+        }
+
+        let message = await new HttpHelper().makeDeleteRequest(this.entity.getEndpoint(), path);
 
         return message;
     }

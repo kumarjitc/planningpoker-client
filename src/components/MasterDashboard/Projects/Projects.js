@@ -63,7 +63,14 @@ class Projects extends Component {
     }
 
     async save(data) {
-        await this.entityFactory.update(data);
+        await this.entityFactory.save(data);
+
+        this.onModalClose();
+        await this.getAll();
+    }
+
+    async delete(data) {
+        await this.entityFactory.delete(data);
 
         this.onModalClose();
         await this.getAll();
@@ -102,7 +109,11 @@ class Projects extends Component {
                     }}
                     onSave={(data) => {
                         this.save(data);
-                    }} />
+                    }}
+                    onDelete={(id) => {
+                        this.delete(id);
+                    }}
+                />
             </>
         );
     }

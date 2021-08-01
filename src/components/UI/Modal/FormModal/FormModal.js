@@ -98,7 +98,9 @@ export default function FormModal(props) {
                             </Fab>
                         </Tooltip>
                         <Tooltip title="Delete">
-                            <Fab size="small" color="secondary" onClick={props.onCancel}>
+                            <Fab size="small" color="secondary" onClick={() => {
+                                props.onDelete(getValue());
+                            }}>
                                 <DeleteIcon />
                             </Fab>
                         </Tooltip>
