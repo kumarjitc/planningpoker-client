@@ -39,7 +39,6 @@ class Projects extends Component {
     }
 
     onAddClick() {
-
         this.setState({
             ...this.state,
             openModal: true,
@@ -49,7 +48,6 @@ class Projects extends Component {
     }
 
     onEditClick(project) {
-
         this.setState({
             ...this.state,
             openModal: true,
@@ -125,6 +123,9 @@ class Projects extends Component {
                     }}
                 />)
             : null;
+        const projectList = this.state.data ? (<CardGrid {...this.state.data} type="project" onEditClick={(id) => {
+            this.onEditClick(id);
+        }} />) : null;
 
         return (
             <>
@@ -144,9 +145,7 @@ class Projects extends Component {
                         </div>
                     </h2>
                     <div className="project-list">
-                        <CardGrid {...this.state.data} type="project" onEditClick={(id) => {
-                            this.onEditClick(id);
-                        }} />
+                        {projectList}
                     </div>
                 </div>
                 {message}

@@ -24,7 +24,7 @@ export default function FormGroup(props) {
                 {
                     Object.keys(state).map(control => {
                         return (
-                            <Grid item xs={12}>
+                            <Grid item xs={12} key={control}>
                                 <FormInput fullWidth={props.fullWidth} {...state[control]} name={control} key={control} onChange={props.onChange} onBlur={props.onBlur} />
                             </Grid>)
                     })

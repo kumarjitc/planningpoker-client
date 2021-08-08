@@ -91,7 +91,7 @@ export default function FormModal(props) {
         <div>
             <Dialog open={props.open} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
-                    <div class="modal-title">
+                    <div className="modal-title">
                         {`Modify ${props.type} Details`}
                     </div>
                     <div className={classes.modalAction}>

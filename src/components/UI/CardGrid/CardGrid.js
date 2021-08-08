@@ -114,6 +114,10 @@ const Card = (props) => {
 const CardGrid = (props) => {
     const classes = useStyles();
 
+    if (props.type) {
+        console.trace(props.type);
+    }
+
     const grid = props && props.rows ? props.rows.map((item, index) => {
         return <Card item={item} onEditClick={props.onEditClick} key={index} />;
     }) : null;

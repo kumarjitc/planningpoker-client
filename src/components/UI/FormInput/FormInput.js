@@ -80,8 +80,7 @@ const FormInput = (props) => {
                             props.onBlur(props.name, false);
                         }
                     }}
-                    helperText="Invalid entry"
-                    inputProps={{ 'maxlength': props.length || 15 }}
+                    inputProps={{ 'maxLength': props.length || 15 }}
                     error={props.invalid}
                 />
             </FormControl>
@@ -149,7 +148,7 @@ const FormInput = (props) => {
                             props.onBlur(props.name, false);
                         }
                     }}
-                    inputProps={{ 'maxlength': props.length || 500 }}
+                    inputProps={{ 'maxLength': props.length || 500 }}
                     error={props.invalid}
                 />
             </FormControl>
