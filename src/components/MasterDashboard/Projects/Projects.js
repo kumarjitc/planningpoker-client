@@ -38,6 +38,16 @@ class Projects extends Component {
         await this.getAll();
     }
 
+    onAddClick() {
+
+        this.setState({
+            ...this.state,
+            openModal: true,
+            selected: null,
+            isHttpComplete: false
+        });
+    }
+
     onEditClick(project) {
 
         this.setState({
@@ -93,28 +103,8 @@ class Projects extends Component {
         const message = this.state.isHttpComplete
             ? (<MessageModal type={this.state.errorMessage ? ERROR : SUCCESS} message={this.state.errorMessage} />)
             : null;
-
-        return (
-            <>
-                <div className="container">
-                    <h2>
-                        <div>
-                            Projects
-                        </div>
-                        <div>
-                            <Tooltip title="Add">
-                                <Fab size="small" className={classes.fabGreen}>
-                                    <Addicon />
-                                </Fab>
-                            </Tooltip>
-                        </div>
-                    </h2>
-                    <div className="project-list">
-                        <CardGrid {...this.state.data} type="project" onEditClick={(id) => {
-                            this.onEditClick(id);
-                        }} />
-                    </div>
-                </div>
+        const form = this.state.openModal
+            ? (
                 <FormModal
                     open={this.state.openModal}
                     controls={this.state.controls}
@@ -129,8 +119,34 @@ class Projects extends Component {
                     onDelete={(id) => {
                         this.delete(id);
                     }}
-                />
+                />)
+            : null;
+
+        return (
+            <>
+                <div className="container">
+                    <h2>
+                        <div>
+                            Projects
+                        </div>
+                        <div>
+                            <Tooltip title="Add">
+                                <Fab size="small" className={classes.fabGreen} onClick={() => {
+                                    this.onAddClick()
+                                }}>
+                                    <Addicon />
+                                </Fab>
+                            </Tooltip>
+                        </div>
+                    </h2>
+                    <div className="project-list">
+                        <CardGrid {...this.state.data} type="project" onEditClick={(id) => {
+                            this.onEditClick(id);
+                        }} />
+                    </div>
+                </div>
                 {message}
+                {form}
             </>
         );
     }

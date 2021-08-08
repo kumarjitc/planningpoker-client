@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -41,17 +41,22 @@ export default function FormModal(props) {
     const classes = useStyles();
 
     const setValue = () => {
-        const controls = { ...props.controls };
-        if (!props.data) {
-            return controls;
+        const controls = JSON.parse(JSON.stringify(props.controls));
+        console.log(props, controls);
+        if (props.data) {
+            Object.keys(controls).forEach(control => {
+                controls[control]['value'] = props.data[control];
+            });
         }
-        Object.keys(controls).forEach(control => {
-            controls[control]['value'] = props.data[control];
-        });
         return controls;
     }
 
-    const [form, setForm] = useState(setValue());
+    const [form, setForm] = useState({});
+
+    useEffect(() => {
+        console.log('HERE WAIT');
+        setForm(setValue());
+    }, [props.controls]);
 
     const onChange = (name, value) => {
         setForm({
