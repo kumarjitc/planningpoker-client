@@ -42,7 +42,6 @@ export default function FormModal(props) {
 
     const setValue = () => {
         const controls = JSON.parse(JSON.stringify(props.controls));
-        console.log(props, controls);
         if (props.data) {
             Object.keys(controls).forEach(control => {
                 controls[control]['value'] = props.data[control];
@@ -54,7 +53,6 @@ export default function FormModal(props) {
     const [form, setForm] = useState({});
 
     useEffect(() => {
-        console.log('HERE WAIT');
         setForm(setValue());
     }, [props.controls]);
 

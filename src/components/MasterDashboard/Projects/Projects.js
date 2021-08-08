@@ -62,8 +62,7 @@ class Projects extends Component {
         this.setState({
             ...this.state,
             openModal: false,
-            selected: null,
-            isHttpComplete: true
+            selected: null
         });
     }
 
@@ -77,17 +76,16 @@ class Projects extends Component {
     }
 
     async save(data) {
-        let message = await this.entityFactory.save(data);
+        let response = await this.entityFactory.save(data);
 
-        if (!message.errorMessage) {
+        this.setState({
+            ...this.state,
+            response: response.data,
+            isHttpComplete: true
+        });
+        if (response.status === 200) {
             this.onModalClose();
             await this.getAll();
-        } else {
-            this.setState({
-                ...this.state,
-                isHttpComplete: true,
-                errorMessage: message.errorMessage
-            });
         }
     }
 
@@ -101,9 +99,9 @@ class Projects extends Component {
     render() {
         const { classes } = this.props;
         const message = this.state.isHttpComplete
-            ? (<MessageModal type={this.state.errorMessage ? ERROR : SUCCESS} message={this.state.errorMessage} />)
+            ? (<MessageModal {...this.state.response} />)
             : null;
-        const form = this.state.openModal
+        const formModal = this.state.openModal
             ? (
                 <FormModal
                     open={this.state.openModal}
@@ -146,7 +144,7 @@ class Projects extends Component {
                     </div>
                 </div>
                 {message}
-                {form}
+                {formModal}
             </>
         );
     }

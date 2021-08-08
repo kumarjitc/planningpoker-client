@@ -28,14 +28,14 @@ export default function CustomizedSnackbars(props) {
         setIsOpen(false);
     };
 
-    let message = props.type === SUCCESS ? 'Operation Completed Successfully!' : 'Error Occurred During Processing';
+    let message = props.status === 200 ? 'Operation Completed Successfully!' : 'Error Occurred During Processing';
     message = props.message || message;
 
     return (
         <div className={classes.root}>
             <Snackbar open={isOpen} autoHideDuration={10000} onClose={onCloseClick}>
-                <Alert onClose={onCloseClick} severity={props.type}>
-                    {message}
+                <Alert onClose={onCloseClick} severity={props.status === 200 ? SUCCESS : ERROR}>
+                    {props.status === 200 ? message.message : message.errorMessage}
                 </Alert>
             </Snackbar>
         </div>

@@ -1,16 +1,53 @@
 const BASE_URL = 'http://localhost:8000/';
 
+class Response {
+    static #STATUS = 'status';
+    static #DEFAULT_STATUS = 200;
+    static #MESSAGE = 'message';
+
+    #data;
+
+    constructor() {
+        this.#data = new Map();
+    }
+
+    addStatus(status) {
+        this.#data.set(Response.#STATUS, status);
+
+        return this;
+    }
+
+    addMessage(message) {
+        this.#data.set(Response.#MESSAGE, message);
+
+        return this;
+    }
+
+    get status() {
+        return this.#data.has(Response.#STATUS) ? this.#data.get(Response.#STATUS) : Response.#DEFAULT_STATUS;
+    }
+
+    get data() {
+        return {
+            ...Object.fromEntries(this.#data)
+        };
+    }
+}
+
 export class HttpHelper {
     async makeGetRequest(endpoint) {
         let response = await fetch(`${BASE_URL}${endpoint}`);
 
+        /**
+         * Update This To Return Response
+         */
         return response.json();
     }
 
     async makePutRequest(endpoint, path, data) {
-        let params = Object.entries(path).map(entry => entry.join('/')).join('/');
+        const params = Object.entries(path).map(entry => entry.join('/')).join('/');
 
-        let response = await fetch(`${BASE_URL}${endpoint}/${params}`, {
+        const response = await fetch(`${BASE_URL}${endpoint}/${params}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -18,7 +55,9 @@ export class HttpHelper {
             body: JSON.stringify(data)
         });
 
-        return response.json();
+        const body = await response.json();
+
+        return new Response().addStatus(response.status).addMessage(body);
     }
 
     async makeDeleteRequest(endpoint, path) {
@@ -28,6 +67,7 @@ export class HttpHelper {
             method: 'DELETE'
         });
 
-        return response.text();
+        return new Response().addStatus(response.status).addMessage(response.json());
     }
 }
+
