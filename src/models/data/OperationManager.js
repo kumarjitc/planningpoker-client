@@ -20,6 +20,25 @@ export default class OperationManager {
     }
 
     async save(data) {
+        let message;
+        if (data[DB_ID]) {
+            message = await this.update(data);
+        } else {
+            message = await this.insert(data);
+        }
+
+        return message;
+    }
+
+    async insert(data) {
+        delete data._id;
+
+        let message = await new HttpHelper().makePostRequest(this.entity.getEndpoint(), data);
+
+        return message;
+    }
+
+    async update(data) {
         let path = {
             [URL_ID]: data[DB_ID]
         }
