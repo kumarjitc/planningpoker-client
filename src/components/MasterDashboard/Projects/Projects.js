@@ -8,9 +8,11 @@ import Project from "../../../models/data/project/project";
 import CardGrid from "../../UI/CardGrid/CardGrid";
 import FormModal from '../../UI/Modal/FormModal/FormModal';
 import MessageModal, { SUCCESS, ERROR } from '../../UI/Modal/MessageModal/MessageModal';
-import { PROJECT } from '../../../controls/controls'
+import { PROJECT } from '../../../controls/controls';
 import { PRIMARY_GREEN, HOVER_GREEN } from "../../../utils/MaterialColorCodes";
 import { withStyles } from "@material-ui/core";
+
+import { selectProject } from "../../../store/actions/projects";
 
 const styles = theme => ({
     fabGreen: {
@@ -62,6 +64,21 @@ class Projects extends PureComponent {
             openModal: false,
             selected: null
         });
+    }
+
+    onClick(project) {
+        let projectList = { ...this.state.data };
+
+        projectList.rows.forEach((item, index) => {
+            projectList.rows[index]['isSelected'] = item['isSelected'] ? false : (project['_id'] === item['_id']);
+        });
+
+        this.setState({
+            ...this.state,
+            data: projectList
+        });
+
+        selectProject(project['isSelected'] ? {} : project);
     }
 
     async getAll() {
@@ -123,8 +140,10 @@ class Projects extends PureComponent {
                     }}
                 />)
             : null;
-        const projectList = this.state.data ? (<CardGrid {...this.state.data} type="project" onEditClick={(id) => {
-            this.onEditClick(id);
+        const projectList = this.state.data ? (<CardGrid {...this.state.data} type="project" onEditClick={(project) => {
+            this.onEditClick(project);
+        }} onClick={(project) => {
+            this.onClick(project);
         }} />) : null;
 
         return (

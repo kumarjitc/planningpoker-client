@@ -4,34 +4,32 @@ import SprintList from '../../../models/data/sprint/sprintList';
 import AppGrid from "../../UI/AppGrid/AppGrid";
 import CardGrid from "../../UI/CardGrid/CardGrid";
 
-const DATA = [{
-    id: 1,
-    description: 'This is a story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    project: 'Sprint 10.2'
-}, {
-    id: 2,
-    description: 'This is another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    project: 'Sprint 10.3'
-}, {
-    id: 3,
-    description: 'This is one another story This is a story This is a story This is a story This is a story This is a story',
-    name: 'test project 1',
-    project: 'Sprint 10.4'
-}];
+import ProjectStore from '../../../store/reducers/projects';
 
 export default class Projects extends Component {
     state = {};
 
     componentDidMount() {
-        this.setState({});
+        ProjectStore.subscribe(() => {
+            this.populateSprints(ProjectStore.getState().project)
+        });
+    }
+
+    populateSprints(project) {
+        this.setState({
+            ...this.state,
+            project: project
+        });
     }
 
     render() {
+        const header = (this.state && this.state.project && this.state.project.name)
+            ? `Sprints - ${this.state.project.name}`
+            : 'Sprints';
+
         return (
             <div className="container">
-                <h2>Sprints</h2>
+                <h2>{header}</h2>
                 <div className="sprint-list">
                     <CardGrid {...this.state} />
                 </div>

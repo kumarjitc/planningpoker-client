@@ -83,13 +83,15 @@ const useStyles = makeStyles({
             color: '#2B73E4',
             padding: '10px!important'
         }
+    },
+    content: {
+        height: '100%'
     }
 });
 
 const Card = (props) => {
     const classes = useStyles();
-    const isSelected = props.isSelected ? (<SelectedIcon className="selected" />) : null;
-    console.log('UPDATE');
+    const isSelected = props.item.isSelected ? (<SelectedIcon className="selected" />) : null;
 
     return (
         <MaterialCard className={classes.card} variant="outlined">
@@ -104,7 +106,7 @@ const Card = (props) => {
                     </Fab>
                 </Tooltip>
             </CardActions>
-            <CardContent>
+            <CardContent onClick={() => { props.onClick({ ...props.item }); }} className={classes.content}>
                 <Typography variant="h5" component="h3" color="textSecondary">{props.item.owner}</Typography>
                 <Typography variant="caption" component="p" color="textSecondary">{props.item.desc}</Typography>
             </CardContent>
@@ -121,7 +123,7 @@ const CardGrid = (props) => {
     }, [props.rows]);
 
     const grid = rows ? rows.map((item, index) => {
-        return <Card item={item} onEditClick={props.onEditClick} key={index} />;
+        return <Card item={item} onEditClick={props.onEditClick} onClick={props.onClick} key={index} />;
     }) : null;
 
     return (
@@ -131,6 +133,4 @@ const CardGrid = (props) => {
     );
 };
 
-export default React.memo(CardGrid, (previous, current) => {
-    return JSON.stringify(previous) === JSON.stringify(current);
-});
+export default CardGrid;
