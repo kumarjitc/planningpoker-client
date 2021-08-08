@@ -90,7 +90,13 @@ class Projects extends Component {
     }
 
     async delete(data) {
-        await this.entityFactory.delete(data);
+        let response = await this.entityFactory.delete(data);
+
+        this.setState({
+            ...this.state,
+            response: response.data,
+            isHttpComplete: true
+        });
 
         this.onModalClose();
         await this.getAll();

@@ -81,7 +81,9 @@ export class HttpHelper {
             method: 'DELETE'
         });
 
-        return new Response().addStatus(response.status).addMessage(response.json());
+        const body = await response.json();
+
+        return new Response().addStatus(response.status).addMessage(body);
     }
 }
 
