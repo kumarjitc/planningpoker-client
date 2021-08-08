@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import OperationManager from "../../../models/data/OperationManager";
 import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
@@ -21,7 +21,7 @@ const styles = theme => ({
     }
 });
 
-class Projects extends Component {
+class Projects extends PureComponent {
     state = {
         openModal: false,
         controls: PROJECT,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MaterialCard from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -89,6 +89,7 @@ const useStyles = makeStyles({
 const Card = (props) => {
     const classes = useStyles();
     const isSelected = props.isSelected ? (<SelectedIcon className="selected" />) : null;
+    console.log('UPDATE');
 
     return (
         <MaterialCard className={classes.card} variant="outlined">
@@ -113,12 +114,13 @@ const Card = (props) => {
 
 const CardGrid = (props) => {
     const classes = useStyles();
+    const [rows, setRows] = useState([]);
 
-    if (props.type) {
-        console.trace(props.type);
-    }
+    useEffect(() => {
+        setRows(props && props.rows ? props.rows : []);
+    }, [props.rows]);
 
-    const grid = props && props.rows ? props.rows.map((item, index) => {
+    const grid = rows ? rows.map((item, index) => {
         return <Card item={item} onEditClick={props.onEditClick} key={index} />;
     }) : null;
 
@@ -129,4 +131,6 @@ const CardGrid = (props) => {
     );
 };
 
-export default CardGrid;
+export default React.memo(CardGrid, (previous, current) => {
+    return JSON.stringify(previous) === JSON.stringify(current);
+});
